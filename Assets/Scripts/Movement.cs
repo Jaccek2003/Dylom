@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
     Rigidbody rb;
     SpriteRenderer sr;
 
-    public float upForce = 10; // Si?a skoku
+    public float upForce = 10; // Siła skoku
     public float speed = 1500;
     public float runSpeed = 2500;
 
@@ -65,8 +65,8 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Upewnij si?, ?e gracz dotyka pod?o?a
-        if (collision.gameObject.CompareTag("Ground")) // Dodaj odpowiedni tag do pod?o?a
+        // Upewnij si?, że gracz dotyka podłóża
+        if (collision.gameObject.CompareTag("Ground")) // Dodaj odpowiedni tag do podłoga
         {
             isGrounded = true;
         }
@@ -74,10 +74,10 @@ public class Movement : MonoBehaviour
 
     public void ResetMovement()
     {
-        transform.rotation = Quaternion.identity; // Zeruj rotacj? gracza
+        transform.rotation = Quaternion.identity; // Zeruj rotację gracza
         if (Camera.main != null)
         {
-            Camera.main.transform.rotation = Quaternion.identity; // Zeruj rotacj? kamery
+            Camera.main.transform.rotation = Quaternion.identity; // Zeruj rotację kamery
         }
     }
 
