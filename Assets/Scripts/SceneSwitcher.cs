@@ -10,7 +10,7 @@ public class SceneSwitcher : MonoBehaviour
     public Transform PlayerSavePosition;
 
     private bool canSwitchScene = true; // Flaga kontrolująca możliwość zmiany sceny
-    public float switchCooldown = 1.0f; // Czas oczekiwania po przełączeniu sceny
+    public float switchCooldown = 0.5f; // Czas oczekiwania po przełączeniu sceny
 
     private void Start()
     {

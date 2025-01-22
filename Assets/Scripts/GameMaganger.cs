@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,12 +13,15 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Zachowaj miêdzy scenami
+            
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
+        Debug.Log($"instance");
+        DontDestroyOnLoad(gameObject); // Zachowaj miêdzy scenami
     }
 
     // Metoda zapisywania pozycji gracza
