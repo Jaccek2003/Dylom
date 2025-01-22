@@ -1,6 +1,5 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AcceptItem : MonoBehaviour
@@ -12,17 +11,20 @@ public class AcceptItem : MonoBehaviour
         public Dialogue dialogue;
     }
 
-    public List<string> acceptedItems;  // Lista akceptowanych przedmiotów
-    public RotationHandler rotationHandler;  // Obs³uga przeci¹gania przedmiotów
-    public List<DialougeItemPair> dialoguesList;  // Dialog wyœwietlany po zaakceptowaniu przedmiotu
+    public List<string> acceptedItems;  // Lista akceptowanych przedmiotÃ³w
+    public RotationHandler rotationHandler;  // ObsÅ‚uga przeciÄ…gania przedmiotÃ³w
+    public List<DialougeItemPair> dialoguesList;  // Dialog wyÅ›wietlany po zaakceptowaniu przedmiotu
     private Dictionary<string, Dialogue> dialogues = new Dictionary<string, Dialogue>();
     public List<DialougeItemPair> nonAcceptedDialoguesList;
     private Dictionary<string, Dialogue> nonAcceptedDialogues = new Dictionary<string, Dialogue>();
-    private bool isMouseOver = false;  // Flaga dosprawdzania, czy myszka jest nad NPC
+    private bool isMouseOver = false;  // Flaga do sprawdzania, czy myszka jest nad NPC
+
+    // Referencja do obrazu UI, ktÃ³ry ma byÄ‡ usuniÄ™ty
+    public GameObject uiImage;
 
     private void Start()
     {
-        foreach(DialougeItemPair pair in dialoguesList)
+        foreach (DialougeItemPair pair in dialoguesList)
         {
             Debug.Log(pair.name + " " + pair.dialogue.ToString());
             dialogues.Add(pair.name, pair.dialogue);
@@ -35,7 +37,7 @@ public class AcceptItem : MonoBehaviour
 
     void Update()
     {
-        // Sprawdzanie, czy przedmiot jest przeci¹gany nad NPC i zosta³ upuszczony
+        // Sprawdzanie, czy przedmiot jest przeciÄ…gany nad NPC i zostaÅ‚ upuszczony
         if (Input.GetMouseButtonUp(0) && isMouseOver)
         {
             if (rotationHandler.isDragging)
@@ -44,20 +46,25 @@ public class AcceptItem : MonoBehaviour
                 Debug.Log(rotationHandler.itemName);
                 if (acceptedItems.Contains(draggedItem))
                 {
-                    
+                    // UsuÅ„ obraz UI
+                    if (uiImage != null)
+                    {
+                        uiImage.SetActive(false);
+                    }
 
-                    // Zresetuj stan przeci¹gania
+                    // Zresetuj stan przeciÄ…gania
                     rotationHandler.isDragging = false;
                     rotationHandler.RemoveItem(rotationHandler.itemName);
-                    // Uruchom dialog zwi¹zany z przedmiotem
+
+                    // Uruchom dialog zwiÄ…zany z przedmiotem
                     DialogueManager.Instance.StartDialogue(dialogues[rotationHandler.itemName]);
                 }
                 else
                 {
-                    // Zresetuj stan przeci¹gania
+                    // Zresetuj stan przeciÄ…gania
                     rotationHandler.isDragging = false;
-                    //rotationHandler.RemoveItem(rotationHandler.itemName);
-                    // Uruchom dialog zwi¹zany z przedmiotem
+
+                    // Uruchom dialog zwiÄ…zany z przedmiotem
                     DialogueManager.Instance.StartDialogue(nonAcceptedDialogues[rotationHandler.itemName]);
                 }
             }
@@ -71,7 +78,6 @@ public class AcceptItem : MonoBehaviour
 
     void OnMouseExit()
     {
-        isMouseOver = false;  // Myszka opuœci³a NPC
+        isMouseOver = false;  // Myszka opuÅ›ciÅ‚a NPC
     }
 }
-
