@@ -6,6 +6,8 @@ TagManager:
   tags:
   - NPC
   - Ground
+  - ActiveNPC
+  - NonActiveNPC
   layers:
   - Default
   - TransparentFX
