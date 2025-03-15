@@ -11,6 +11,8 @@ public class AcceptItem : MonoBehaviour
         public Dialogue dialogue;
     }
 
+    public DialogueManager dialogueManager;
+
     public List<string> acceptedItems;  // Lista akceptowanych przedmiotów
     public RotationHandler rotationHandler;  // Obsługa przeciągania przedmiotów
     public List<DialougeItemPair> dialoguesList;  // Dialog wyświetlany po zaakceptowaniu przedmiotu
@@ -57,7 +59,7 @@ public class AcceptItem : MonoBehaviour
                     rotationHandler.RemoveItem(rotationHandler.itemName);
 
                     // Uruchom dialog związany z przedmiotem
-                    DialogueManager.Instance.StartDialogue(dialogues[rotationHandler.itemName]);
+                    dialogueManager.StartDialogue(dialogues[rotationHandler.itemName]);
                 }
                 else
                 {
@@ -65,7 +67,7 @@ public class AcceptItem : MonoBehaviour
                     rotationHandler.isDragging = false;
 
                     // Uruchom dialog związany z przedmiotem
-                    DialogueManager.Instance.StartDialogue(nonAcceptedDialogues[rotationHandler.itemName]);
+                    dialogueManager.StartDialogue(nonAcceptedDialogues[rotationHandler.itemName]);
                 }
             }
         }

@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - ActiveNPC
   - NonActiveNPC
+  - Special
+  - Key
   layers:
   - Default
   - TransparentFX

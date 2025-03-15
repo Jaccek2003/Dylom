@@ -1,69 +1,75 @@
+using System;
 using UnityEngine;
 
 public class DialogTrigger : MonoBehaviour
 {
-    public GameObject dialogPanel; // Panel dialogu, który ma siê wyœwietliæ
-    public Transform player; // Transform gracza (przeci¹gnij gracza do tego pola w inspektorze)
-    public float talkRange = 3f; // Zasiêg, w którym mo¿na rozmawiaæ z postaci¹
+    public DialogueManager dialogueManager;
+    public GameObject dialogPanel;
+    public Transform player;
+    public float talkRange = 3f;
+    public Dialogue dialogue;
+    private bool wasFinished = false;
 
     private void Start()
     {
-        // Na pocz¹tku ukrywamy dialog
         if (dialogPanel != null)
         {
             dialogPanel.SetActive(false);
         }
     }
 
-    // Funkcja do pokazywania/ukrywania dialogu
     private void ToggleDialog()
     {
         if (dialogPanel != null)
         {
-            // Prze³¹czamy widocznoœæ panelu dialogu
+            if (!wasFinished)
+            {
+                dialogueManager.StartDialogue(dialogue);
+                wasFinished = true;
+            }
             dialogPanel.SetActive(!dialogPanel.activeSelf);
         }
     }
 
-    // Podchodzenie do postaci (tylko dla ActiveNPC)
     private void OnTriggerEnter(Collider other)
     {
-        // Sprawdzamy, czy gracz wszed³ w trigger i czy to ActiveNPC
         if (other.CompareTag("Player") && gameObject.CompareTag("ActiveNPC"))
         {
-            // Sprawdzamy odleg³oœæ miêdzy graczem a postaci¹
             float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
             if (distanceToPlayer <= talkRange)
             {
-                ToggleDialog(); // Pokazujemy dialog, jeœli gracz jest wystarczaj¹co blisko
+                ToggleDialog();
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // Ukrywamy dialog, gdy gracz wyjdzie z triggera (tylko dla ActiveNPC)
         if (other.CompareTag("Player") && gameObject.CompareTag("ActiveNPC"))
         {
-            ToggleDialog(); // Ukrywamy dialog
+            ToggleDialog();
         }
     }
 
-    // Klikniêcie na postaæ (dzia³a dla ActiveNPC i NonActiveNPC)
     private void OnMouseDown()
     {
-        // Sprawdzenie odleg³oœci miêdzy graczem a obiektem
+        if (!gameObject.activeInHierarchy)
+        {
+            Debug.LogWarning($"Nie mo¿esz rozmawiaæ z wy³¹czon¹ postaci¹: {gameObject.name}");
+            return;
+        }
+
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
         if (distanceToPlayer <= talkRange)
         {
-            // Jeœli gracz jest wystarczaj¹co blisko, prze³¹czamy dialog
+            Debug.Log($"Rozmowa z {gameObject.name}");
             ToggleDialog();
         }
         else
         {
-            Debug.Log("Musisz byæ bli¿ej, aby porozmawiaæ z t¹ osob¹.");
+            Debug.Log("Musisz byæ bli¿ej, aby porozmawiaæ.");
         }
     }
 }

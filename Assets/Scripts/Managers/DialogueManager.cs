@@ -1,50 +1,87 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // Dodano odpowiedni¹ przestrzeñ nazw
+using UnityEngine.UI;
 using TMPro;
+
+[System.Serializable]
+public class DialogueCharacter
+{
+    public string name;
+    public Sprite icon;
+}
+
+[System.Serializable]
+public class DialogueLine
+{
+    public DialogueCharacter character;
+    [TextArea(3, 10)]
+    public string line;
+}
+
+[System.Serializable]
+public class Dialogue
+{
+    public List<DialogueLine> dialogueLines = new List<DialogueLine>();
+}
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance;
-
     public Image characterIcon;
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueArea;
 
-    private Queue<DialogueLine> lines;
+    public Queue<DialogueLine> lines;
 
     public bool isDialogueActive = false;
 
     public float typingSpeed = 0.2f;
 
-    public Animator animator; // Animator, kontroluje animacje panelu dialogowego
+    public Animator animator;
 
     private GameObject continueButton;
 
+    public GameObject dialogPanel;
+
+    private bool canReopenDialogue = false;
+
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
 
         lines = new Queue<DialogueLine>();
 
-        // ZnajdŸ przycisk ContinueButton w scenie
         continueButton = GameObject.Find("ContinueButton");
         if (continueButton != null)
         {
-            continueButton.SetActive(false); // Ukryj przycisk na starcie
+            continueButton.SetActive(false);
         }
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        if (isDialogueActive)
+        {
+            Debug.Log("Zamykam poprzedni dialog...");
+            EndDialogue();
+        }
+
+        if (dialogPanel == null)
+        {
+            Debug.LogError("dialogPanel nie jest przypisany w DialogueManager!");
+            return;
+        }
+
+        Debug.Log($"Rozpoczynam dialog z {dialogue.dialogueLines[0].character.name}");
+
         isDialogueActive = true;
+        canReopenDialogue = false;
 
         if (continueButton != null)
         {
-            continueButton.SetActive(true); // Poka¿ przycisk Continue
+            continueButton.SetActive(true);
         }
+
+        dialogPanel.SetActive(true);
 
         lines.Clear();
 
@@ -65,7 +102,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         DialogueLine currentLine = lines.Dequeue();
-
+        Debug.Log(currentLine.line);
         characterIcon.sprite = currentLine.character.icon;
 
         StopAllCoroutines();
@@ -100,10 +137,38 @@ public class DialogueManager : MonoBehaviour
 
         if (continueButton != null)
         {
-            continueButton.SetActive(false); // Ukryj przycisk Continue
+            continueButton.SetActive(false);
         }
 
-        // Dodaj dodatkowe akcje po zakoñczeniu dialogu, np. zamkniêcie okna dialogowego
+        if (dialogPanel != null)
+        {
+            dialogPanel.SetActive(false);
+        }
+
+        StartCoroutine(EnableDialogueReopen());
+
         Debug.Log("Dialogue ended.");
     }
+
+    IEnumerator EnableDialogueReopen()
+    {
+        yield return new WaitForSeconds(1.5f);
+        canReopenDialogue = true;
+    }
+
+    public void TryStartDialogue(Dialogue dialogue)
+    {
+        if (canReopenDialogue || !isDialogueActive)
+        {
+            canReopenDialogue = false;
+            StartDialogue(dialogue);
+        }
+    }
+
+    public void ShowDialogueImmediately(Dialogue dialogue)
+    {
+        canReopenDialogue = false;
+        StartDialogue(dialogue);
+    }
 }
+

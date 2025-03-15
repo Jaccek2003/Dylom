@@ -6,29 +6,15 @@ public class MenuController : MonoBehaviour
     public Movement playerMovement; // Odwo³anie do skryptu gracza
     public GameObject continueButton; // Przycisk kontynuacji gry
     public GameObject backpackContent; // Panel zawartoœci plecaka
-    public Vector3 startPosition = new Vector3(0, 1, 0); // Pocz¹tkowa pozycja gracza
+
+    private Vector3 initialPosition; // Przechowuje pocz¹tkow¹ pozycjê gracza
 
     private void Start()
     {
-        // Jeœli GameManager istnieje, ustaw pozycjê gracza
-        if (GameManager.instance != null)
-        {
-            Vector3 savedPosition = GameManager.instance.LoadPlayerPosition();
-            if (savedPosition != Vector3.zero)
-            {
-                playerMovement.transform.position = savedPosition;
-            }
+        // Zapamiêtaj pozycjê gracza ustawion¹ w edytorze
+        initialPosition = playerMovement.transform.position;
 
-            // SprawdŸ flagê menu
-            if (!GameManager.instance.menuShouldBeOpen)
-            {
-                GameManager.instance.menuShouldBeOpen = true; // Resetuj flagê
-                CloseMenu();
-                return;
-            }
-        }
-
-        // Otwórz menu, jeœli flaga tego wymaga
+        // Otwórz menu na start gry
         OpenMenu();
     }
 
@@ -44,8 +30,11 @@ public class MenuController : MonoBehaviour
     public void NewGame()
     {
         SaveData.instance = new SaveData();
-        playerMovement.transform.position = startPosition;
+
+        // Ustaw gracza na jego pocz¹tkowej pozycji (tam, gdzie zosta³ umieszczony w edytorze)
+        playerMovement.transform.position = initialPosition;
         playerMovement.ResetMovement();
+
         CloseMenu();
     }
 
