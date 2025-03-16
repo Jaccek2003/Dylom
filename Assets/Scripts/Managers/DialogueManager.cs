@@ -171,4 +171,3 @@ public class DialogueManager : MonoBehaviour
         StartDialogue(dialogue);
     }
 }
-
