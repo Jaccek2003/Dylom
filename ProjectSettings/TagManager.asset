@@ -10,6 +10,7 @@ TagManager:
   - NonActiveNPC
   - Special
   - Key
+  - isGrounded
   layers:
   - Default
   - TransparentFX

@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody))]
 
 public class Movement : MonoBehaviour
 {
     Rigidbody rb;
     SpriteRenderer sr;
+    Animator anim;
 
-    public float upForce = 10; // Siła skoku
+    public float upForce = 100;
     public float speed = 1500;
     public float runSpeed = 2500;
 
@@ -21,14 +26,14 @@ public class Movement : MonoBehaviour
 
     public Transform backpack;
     public Vector3 offset1;
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         sr = GetComponentInChildren<SpriteRenderer>();
-
+        anim = GetComponentInChildren<Animator>();
     }
-
+    
     void Update()
     {
         isLeftShift = Input.GetKey(KeyCode.LeftShift);
@@ -45,16 +50,22 @@ public class Movement : MonoBehaviour
             sr.flipX = true;
         }
 
-        // Jump logic
+        // Animacje
+        bool isMoving = moveHorizontal != 0 || moveVertical != 0;
+        anim.SetBool("isRunning", isMoving);
+
+        // Skok
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rb.AddForce(Vector3.up * upForce, ForceMode.Impulse); // Impuls zamiast Force
+            rb.AddForce(Vector3.up * upForce, ForceMode.Impulse);
             isGrounded = false;
+            // anim.SetBool("isGrounded", false);
+            anim.SetTrigger("jump");
         }
+
+        // Aktualizacja pozycji ekwipunku i plecaka
         inventory.position = transform.position + offset;
-
         backpack.position = transform.position + offset1;
-
     }
 
     private void FixedUpdate()
@@ -65,19 +76,19 @@ public class Movement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Upewnij si?, że gracz dotyka podłóża
-        if (collision.gameObject.CompareTag("Ground")) // Dodaj odpowiedni tag do podłoga
+        if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+            // anim.SetBool("isGrounded", true);
         }
     }
 
     public void ResetMovement()
     {
-        transform.rotation = Quaternion.identity; // Zeruj rotację gracza
+        transform.rotation = Quaternion.identity;
         if (Camera.main != null)
         {
-            Camera.main.transform.rotation = Quaternion.identity; // Zeruj rotację kamery
+            Camera.main.transform.rotation = Quaternion.identity;
         }
     }
 
@@ -90,8 +101,6 @@ public class Movement : MonoBehaviour
 
     public void Load()
     {
-        transform.position = new Vector3(SaveData.instance.playerX,
-                                         SaveData.instance.playerY,
-                                         SaveData.instance.playerZ);
+        transform.position = new Vector3(SaveData.instance.playerX, SaveData.instance.playerY, SaveData.instance.playerZ);
     }
 }

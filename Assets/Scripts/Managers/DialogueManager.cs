@@ -131,7 +131,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    void EndDialogue()
+    public void EndDialogue()
     {
         isDialogueActive = false;
 

@@ -33,7 +33,7 @@ public class MenuController : MonoBehaviour
 
         // Ustaw gracza na jego pocz¹tkowej pozycji (tam, gdzie zosta³ umieszczony w edytorze)
         playerMovement.transform.position = initialPosition;
-        playerMovement.ResetMovement();
+  
 
         CloseMenu();
     }
