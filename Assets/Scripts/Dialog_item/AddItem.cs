@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AddItem : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class AddItem : MonoBehaviour
     public RotationHandler rotationHandler;
     public Transform player;
     public float pickupRange = 2.0f;
+
+    public UnityEvent onItemPickedUp;
 
     private SpecialItemHandler specialItemHandler; // Dodajemy referencjê do obs³ugi "specjalnych" przedmiotów
 
@@ -27,7 +30,7 @@ public class AddItem : MonoBehaviour
             {
                 specialItemHandler.OnItemPickedUp(gameObject); // Wywo³aj obs³ugê dla specjalnych przedmiotów
             }
-
+            onItemPickedUp.Invoke();
             Destroy(gameObject);
         }
         else

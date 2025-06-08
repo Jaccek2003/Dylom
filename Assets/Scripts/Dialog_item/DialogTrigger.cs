@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DialogTrigger : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class DialogTrigger : MonoBehaviour
     public float talkRange = 3f;
     public Dialogue dialogue;
     private bool wasFinished = false;
+
+    public UnityEvent onDialogueStarted;
 
     private void Start()
     {
@@ -26,6 +29,7 @@ public class DialogTrigger : MonoBehaviour
             {
                 dialogueManager.StartDialogue(dialogue);
                 wasFinished = true;
+                onDialogueStarted.Invoke();
             }
             dialogPanel.SetActive(!dialogPanel.activeSelf);
         }

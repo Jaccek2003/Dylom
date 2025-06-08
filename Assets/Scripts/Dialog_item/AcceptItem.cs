@@ -23,7 +23,7 @@ public class AcceptItem : MonoBehaviour
     public UnityEvent<string> onItemConsume;
 
     // Referencja do obrazu UI, który ma być usunięty
-    public GameObject uiImage;
+    //public GameObject uiImage;
 
     private void Start()
     {
@@ -49,11 +49,7 @@ public class AcceptItem : MonoBehaviour
                 Debug.Log(rotationHandler.itemName);
                 if (dialogues.ContainsKey(draggedItem))
                 {
-                    // Usuń obraz UI
-                    if (uiImage != null)
-                    {
-                        uiImage.SetActive(false);
-                    }
+                   
 
                     // Zresetuj stan przeciągania
                     rotationHandler.isDragging = false;

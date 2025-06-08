@@ -57,6 +57,11 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        Debug.Log(dialogPanel);
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
         if (isDialogueActive)
