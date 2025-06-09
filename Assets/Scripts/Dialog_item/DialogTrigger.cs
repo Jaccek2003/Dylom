@@ -21,7 +21,7 @@ public class DialogTrigger : MonoBehaviour
         }
     }
 
-    private void ToggleDialog()
+    public void ToggleDialog()
     {
         if (dialogPanel != null)
         {

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 [System.Serializable]
+[CreateAssetMenu]
 public class DialogueCharacter
 {
     public string name;
@@ -12,6 +13,7 @@ public class DialogueCharacter
 }
 
 [System.Serializable]
+[CreateAssetMenu]
 public class DialogueLine
 {
     public DialogueCharacter character;
@@ -20,6 +22,7 @@ public class DialogueLine
 }
 
 [System.Serializable]
+[CreateAssetMenu]
 public class Dialogue
 {
     public List<DialogueLine> dialogueLines = new List<DialogueLine>();

@@ -66,6 +66,9 @@ MonoBehaviour:
   talkRange: 6
   dialogue:
     dialogueLines: []
+  onDialogueStarted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &169320785317427012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +191,7 @@ GameObject:
   - component: {fileID: 4793357356754794858}
   - component: {fileID: 8038158278616344192}
   m_Layer: 0
-  m_Name: Sprie
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
