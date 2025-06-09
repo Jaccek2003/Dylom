@@ -10327,7 +10327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c8c3b90af96304a8397b4f8eafb1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 4087230378514835706, guid: e285cfdb79075e94ebe6fcdac7217e63, type: 3}
+  Item: {fileID: 7552433357823428060, guid: 2bd4c64b8a3965944afd183a3c30091b, type: 3}
   rotationHandler: {fileID: 1210559149}
   player: {fileID: 1555313007}
   pickupRange: 2
