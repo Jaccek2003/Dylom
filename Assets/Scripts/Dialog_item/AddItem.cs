@@ -4,8 +4,8 @@ using UnityEngine.Events;
 public class AddItem : MonoBehaviour
 {
     public Item Item;
-    public RotationHandler rotationHandler;
-    public Transform player;
+    private RotationHandler rotationHandler;
+    private Transform player;
     public float pickupRange = 2.0f;
 
     public UnityEvent onItemPickedUp;
@@ -15,6 +15,8 @@ public class AddItem : MonoBehaviour
     private void Start()
     {
         specialItemHandler = FindObjectOfType<SpecialItemHandler>(); // Znajdü skrypt w scenie
+        rotationHandler = FindObjectOfType<RotationHandler>(true);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void OnMouseDown()

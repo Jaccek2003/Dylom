@@ -8,10 +8,15 @@ public class Item : MonoBehaviour
 
     public string itemName;
     public int id;
-    public RotationHandler rotationHandler;
+    private RotationHandler rotationHandler;
 
     private bool isDragging = false;
     private Vector3 previousPos;
+
+    public void SetRotationHandler(RotationHandler rotationHandler)
+    {
+        this.rotationHandler = rotationHandler;
+    }
 
 
     // Update is called once per frame

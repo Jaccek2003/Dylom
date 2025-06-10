@@ -50,7 +50,7 @@ public class RotationHandler : MonoBehaviour
         foreach (Item item in items)
         {
             Item child = Instantiate<Item>(item);
-            child.rotationHandler = this;
+            child.SetRotationHandler(this);
             child.id = counter;
             Transform childTransform = child.transform;
             childTransform.SetParent(this.transform);

@@ -6,7 +6,7 @@ public class DialogTrigger : MonoBehaviour
 {
     public DialogueManager dialogueManager;
     public GameObject dialogPanel;
-    public Transform player;
+    private Transform player;
     public float talkRange = 3f;
     public Dialogue dialogue;
     private bool wasFinished = false;
@@ -15,6 +15,7 @@ public class DialogTrigger : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         if (dialogPanel != null)
         {
             dialogPanel.SetActive(false);

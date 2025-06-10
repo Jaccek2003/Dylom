@@ -13,7 +13,7 @@ public class AcceptItem : MonoBehaviour
     }
 
     public DialogueManager dialogueManager;
-    public RotationHandler rotationHandler;  // Obsługa przeciągania przedmiotów
+    private RotationHandler rotationHandler;  // Obsługa przeciągania przedmiotów
     public List<DialougeItemPair> dialoguesList;  // Dialog wyświetlany po zaakceptowaniu przedmiotu
     private Dictionary<string, Dialogue> dialogues = new Dictionary<string, Dialogue>();
     public List<DialougeItemPair> nonAcceptedDialoguesList;
@@ -27,6 +27,7 @@ public class AcceptItem : MonoBehaviour
 
     private void Start()
     {
+        rotationHandler = FindObjectOfType<RotationHandler>(true);
         foreach (DialougeItemPair pair in dialoguesList)
         {
             Debug.Log(pair.name + " " + pair.dialogue.ToString());
