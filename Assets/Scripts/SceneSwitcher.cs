@@ -6,10 +6,15 @@ using UnityEngine.Experimental.AI;
 public class SceneSwitcher : MonoBehaviour
 {
     public string sceneName; // Nazwa sceny, do której chcesz przejść
-    public SceneManager sceneManager;
+    private SceneManager sceneManager;
 
     public Vector3 newPos;
 
+
+    private void Start()
+    {
+        sceneManager = FindObjectOfType<SceneManager>(true);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
