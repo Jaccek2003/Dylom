@@ -718,7 +718,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 47607683}
   dialogPanel: {fileID: 94083907}
-  player: {fileID: 1555313007}
   talkRange: 6
   dialogue:
     dialogueLines:
@@ -3337,7 +3336,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: sklep
-  sceneManager: {fileID: 1402034976}
   newPos: {x: -231.2, y: 0, z: 0}
 --- !u!65 &478281214
 BoxCollider:
@@ -3619,7 +3617,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 505958277}
   dialogPanel: {fileID: 268351529}
-  player: {fileID: 1555313007}
   talkRange: 6
   dialogue:
     dialogueLines:
@@ -4481,7 +4478,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 0}
-  rotationHandler: {fileID: 0}
   dialoguesList: []
   nonAcceptedDialoguesList: []
   onItemConsume:
@@ -8587,7 +8583,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: miasto
-  sceneManager: {fileID: 1402034976}
   newPos: {x: -35, y: 0.75, z: 13}
 --- !u!65 &1212312183
 BoxCollider:
@@ -10577,8 +10572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Item: {fileID: 7552433357823428060, guid: 2bd4c64b8a3965944afd183a3c30091b, type: 3}
-  rotationHandler: {fileID: 1210559149}
-  player: {fileID: 1555313007}
   pickupRange: 2
   onItemPickedUp:
     m_PersistentCalls:
@@ -11516,7 +11509,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 47607683}
-  rotationHandler: {fileID: 1210559149}
   dialoguesList:
   - name: coin
     dialogue:
@@ -12670,7 +12662,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300002, guid: a75445bb16444f14f96fdf9c734945cc,
+      objectReference: {fileID: 21300000, guid: ca5e232eb92c46f42869a7cc1cc61739,
         type: 3}
     - target: {fileID: 8038158278616344192, guid: f473e86467dc0334283f73cf53c7b666,
         type: 3}
@@ -13630,7 +13622,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: miasto
-  sceneManager: {fileID: 1402034976}
   newPos: {x: 26, y: 0.65, z: 10}
 --- !u!65 &2024753372
 BoxCollider:
@@ -13909,7 +13900,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: pokoj
-  sceneManager: {fileID: 1402034976}
   newPos: {x: -155, y: 0, z: 0}
 --- !u!65 &2074380785
 BoxCollider:
@@ -14159,7 +14149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 128668191484615603}
-  rotationHandler: {fileID: 1210559149}
   dialoguesList:
   - name: coin
     dialogue:
@@ -14618,7 +14607,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 128668191484615603}
   dialogPanel: {fileID: 1966236898}
-  player: {fileID: 1555313007}
   talkRange: 6
   dialogue:
     dialogueLines:
