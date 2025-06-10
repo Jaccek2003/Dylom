@@ -1266,6 +1266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 1237991911}
+  canvas: {fileID: 1408895020}
   kasjerkaDialogue:
     dialogueLines:
     - character:
@@ -3900,7 +3901,7 @@ PrefabInstance:
     - target: {fileID: 8356939928368100711, guid: 115d571547606504698aa20ef480e230,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8579409988536614885, guid: 115d571547606504698aa20ef480e230,
         type: 3}
@@ -8309,7 +8310,7 @@ MonoBehaviour:
     dialogueLines:
     - character:
         name: Sklepikarka
-        icon: {fileID: 21300002, guid: a75445bb16444f14f96fdf9c734945cc, type: 3}
+        icon: {fileID: 21300000, guid: ca5e232eb92c46f42869a7cc1cc61739, type: 3}
       line: "Ten chleb jest czerstwy, we\u017A sobie"
 --- !u!114 &1237991911 stripped
 MonoBehaviour:

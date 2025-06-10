@@ -5,6 +5,7 @@ using UnityEngine;
 public class KasjerkaTrigger : MonoBehaviour
 {
     public DialogueManager dialogueManager;
+    public GameObject canvas;
     public Dialogue kasjerkaDialogue;
     public float cooldownTime = 60f; // 1 minuta cooldownu
     public float dialogueDuration = 2f; // 2 sekundy trwania dialogu
@@ -14,8 +15,10 @@ public class KasjerkaTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("enter");
         if (other.gameObject.CompareTag("Player") && !isOnCooldown)
         {
+            Debug.Log("player");
             playerInside = true;
             StartCoroutine(ShowDialogueWithCooldown());
         }
@@ -23,18 +26,22 @@ public class KasjerkaTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("exit");
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("exit player");
             playerInside = false;
         }
     }
 
     private IEnumerator ShowDialogueWithCooldown()
     {
+        Debug.Log("corotine");
         while (playerInside) // Pêtla sprawdza, czy gracz nadal jest w triggerze
         {
             isOnCooldown = true;
-            dialogueManager.TryStartDialogue(kasjerkaDialogue);
+            canvas.SetActive(true);
+            dialogueManager.StartDialogue(kasjerkaDialogue);
             yield return new WaitForSeconds(dialogueDuration);
             dialogueManager.EndDialogue(); // Automatyczne zamkniêcie po 2 sek
             yield return new WaitForSeconds(cooldownTime);
