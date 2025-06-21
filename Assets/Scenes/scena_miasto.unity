@@ -586,6 +586,7 @@ GameObject:
   - component: {fileID: 47607686}
   - component: {fileID: 47607685}
   - component: {fileID: 47607684}
+  - component: {fileID: 47607690}
   m_Layer: 0
   m_Name: Czarodziej
   m_TagString: ActiveNPC
@@ -611,7 +612,7 @@ MonoBehaviour:
   isDialogueActive: 1
   typingSpeed: 0.09
   animator: {fileID: 0}
-  dialogPanel: {fileID: 134471198}
+  dialogPanel: {fileID: 893822444}
 --- !u!54 &47607684
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -757,7 +758,7 @@ Transform:
   m_GameObject: {fileID: 47607682}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7513678, w: 0.6598837}
-  m_LocalPosition: {x: -12.53, y: -9.89, z: -56.54}
+  m_LocalPosition: {x: -11.29, y: -10.02, z: -56.54}
   m_LocalScale: {x: 1.297946, y: 1.297946, z: 1.297946}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -765,6 +766,19 @@ Transform:
   - {fileID: 569341284}
   m_Father: {fileID: 593695061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 97.418}
+--- !u!114 &47607690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47607682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ee0e4e340738c4c8c340dd0ba8b0a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  location: {x: -5.63, y: -9.63, z: -56.54}
 --- !u!1 &63613990
 GameObject:
   m_ObjectHideFlags: 0
@@ -2548,6 +2562,100 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303874933}
   m_CullTransparentMesh: 1
+--- !u!1 &311481028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 311481029}
+  - component: {fileID: 311481031}
+  - component: {fileID: 311481030}
+  m_Layer: 0
+  m_Name: CzarodziejWall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &311481029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311481028}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -962.58, y: -539.17615, z: 20.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 583355290}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &311481030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311481028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba17f4d2a7cd8ca46975be6629606005, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollision:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 47607687}
+        m_TargetAssemblyTypeName: DialogTrigger, Assembly-CSharp
+        m_MethodName: ToggleDialog
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 893822444}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  objectTag: Player
+--- !u!65 &311481031
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311481028}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15, y: 15, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &350916548
 GameObject:
   m_ObjectHideFlags: 0
@@ -4352,6 +4460,7 @@ Transform:
   - {fileID: 203301193}
   - {fileID: 1641199540}
   - {fileID: 714335895}
+  - {fileID: 311481029}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &593695060
@@ -11407,7 +11516,31 @@ MonoBehaviour:
       m_Calls: []
   onAcceptedItem:
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 311481028}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 47607690}
+        m_TargetAssemblyTypeName: MoveTo, Assembly-CSharp
+        m_MethodName: MoveToLocation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onNotAcceptedItem:
   - m_PersistentCalls:
       m_Calls: []
