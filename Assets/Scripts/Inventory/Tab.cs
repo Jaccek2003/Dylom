@@ -6,15 +6,16 @@ using UnityEngine;
 public class Tab : MonoBehaviour
 {
     // Start is called before the first frame update
-    private bool areChildrenActive = true;
+    private bool areChildrenActive = false;
     public RotationHandler rotationHandler;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) // Check if Tab is pressed
-        {
-            ToggleChildObjects();
-        }
+        if (ProgressManager.Instance.wasBackpackTaken)
+            if (Input.GetKeyDown(KeyCode.Tab)) // Check if Tab is pressed
+            {
+                ToggleChildObjects();
+            }
     }
 
     void ToggleChildObjects()

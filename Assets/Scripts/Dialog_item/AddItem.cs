@@ -25,9 +25,11 @@ public class AddItem : MonoBehaviour
 
         if (distanceToPlayer <= pickupRange)
         {
-            rotationHandler.AddItem(Item);
-            InventoryManager.Instance.AddItem(Item.name); // Dodaj do ekwipunku
-
+            if(Item != null)
+            {
+                rotationHandler.AddItem(Item);
+                InventoryManager.Instance.AddItem(Item.name); // Dodaj do ekwipunku
+            }
             if (gameObject.CompareTag("Special") && specialItemHandler != null)
             {
                 specialItemHandler.OnItemPickedUp(gameObject); // Wywo³aj obs³ugê dla specjalnych przedmiotów

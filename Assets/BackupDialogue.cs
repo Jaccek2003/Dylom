@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackupDialogue : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Dialogue dialogue;
+    public List<Dialogue> dialogues = new List<Dialogue>();
     private DialogueManager dialogueManager;
     void Start()
     {
@@ -18,8 +18,8 @@ public class BackupDialogue : MonoBehaviour
         
     }
 
-    public void StartDialogue()
+    public void StartDialogue(int id)
     {
-        dialogueManager.StartDialogue(dialogue);
+        dialogueManager.StartDialogue(dialogues[id]);
     }
 }

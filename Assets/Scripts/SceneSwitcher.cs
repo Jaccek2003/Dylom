@@ -20,7 +20,6 @@ public class SceneSwitcher : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
             if (GameManager.instance != null)
             {
                 other.transform.position = newPos;

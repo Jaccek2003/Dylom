@@ -19,19 +19,51 @@ public class Thoughts : MonoBehaviour
     private bool hasStarted = false;
     private Coroutine thoughtTimerCoroutine; // Przechowuje coroutine liczπcπ czas myúli
 
+    public static Thoughts Instance { get; private set; }
+
+    void Awake()
+    {
+        // If an instance already exists and it's not this, destroy this one
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Set the instance
+        Instance = this;
+
+        // Optional: Keep this across scenes
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         Thought.text = ""; // Na start tekst pusty
     }
 
-    public void StartThoughts()
+    public void ResetAndStart(List<string> newThoughts)
     {
+        StartCoroutine(StartThoughtsCoroutine(0.3F, newThoughts));
+    }
+
+    public void StartThoughts(List<string> newThoughts)
+    {
+        
         if (!hasStarted && thoughts.Count > 0) // Sprawdü, czy sπ myúli do wyúwietlenia
         {
+            thoughts = newThoughts;
+            Thought.text = ""; // Na start tekst pusty
             hasStarted = true;
             startButton.SetActive(false); // Ukryj przycisk Start
-            StartCoroutine(StartAfterDelay(1f)); // Zacznij myúli po 1 sekundzie
+            StartCoroutine(StartAfterDelay(0.3f)); // Zacznij myúli po 1 sekundzie
         }
+    }
+
+    private IEnumerator StartThoughtsCoroutine(float delay, List<string> newThoughts)
+    {
+        yield return new WaitForSeconds(delay);
+        StartThoughts(newThoughts);
     }
 
     private IEnumerator StartAfterDelay(float delay)
@@ -58,6 +90,7 @@ public class Thoughts : MonoBehaviour
                 {
                     StopCoroutine(thoughtTimerCoroutine);
                 }
+                
                 NextThought();
             }
         }
@@ -68,6 +101,9 @@ public class Thoughts : MonoBehaviour
         if (currentThoughtIndex >= thoughts.Count)
         {
             Thought.text = ""; // Koniec myúli ñ ukryj tekst
+            currentThoughtIndex = 0;
+            hasStarted = false;
+            isTyping = false;
             return;
         }
 
@@ -97,6 +133,18 @@ public class Thoughts : MonoBehaviour
 
     void NextThought()
     {
+        /*// Stop ongoing typing and timer coroutines
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+        if (thoughtTimerCoroutine != null)
+        {
+            StopCoroutine(thoughtTimerCoroutine);
+            thoughtTimerCoroutine = null;
+        }
+*/
         currentThoughtIndex++;
         StartNextThought();
     }
