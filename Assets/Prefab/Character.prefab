@@ -62,7 +62,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 169320785317427012}
   dialogPanel: {fileID: 3915090854029160610}
-  player: {fileID: 0}
   talkRange: 6
   dialogue:
     dialogueLines: []
@@ -291,9 +290,9 @@ Transform:
   m_GameObject: {fileID: 3766871962006082206}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.6620328, y: 3.198262, z: 16.514252}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalScale: {x: 4.1977882, y: 3.6661675, z: 18.930286}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2890496799282894758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -355,7 +354,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueManager: {fileID: 169320785317427012}
-  rotationHandler: {fileID: 0}
   dialoguesList: []
   nonAcceptedDialoguesList: []
   onItemConsume:
