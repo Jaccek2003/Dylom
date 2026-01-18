@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
+using System;
 
 [System.Serializable]
 [CreateAssetMenu]
@@ -19,17 +21,28 @@ public class DialogueLine
     public DialogueCharacter character;
     [TextArea(3, 10)]
     public string line;
+    public AudioClip audioClip;
 }
 
 [System.Serializable]
 [CreateAssetMenu]
 public class Dialogue
 {
+    public string id;
     public List<DialogueLine> dialogueLines = new List<DialogueLine>();
 }
 
+
+
+
 public class DialogueManager : MonoBehaviour
 {
+    [Serializable]
+    public class EndDialogueEvent
+    {
+        public string id;
+        public UnityEvent unityEvent;
+    }
     public Image characterIcon;
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueArea;
@@ -48,6 +61,21 @@ public class DialogueManager : MonoBehaviour
 
     private bool canReopenDialogue = false;
 
+    public List<EndDialogueEvent> endDialogueEventList;
+
+    private Dictionary<string, UnityEvent> unityEventsMap = new Dictionary<string, UnityEvent>();
+
+    private string currentDialogueID;
+
+    private void Start()
+    {
+        foreach (EndDialogueEvent pair in endDialogueEventList)
+        {
+            unityEventsMap.Add(pair.id, pair.unityEvent);
+        }
+        isDialogueActive = false;
+    }
+
     private void Awake()
     {
 
@@ -62,14 +90,18 @@ public class DialogueManager : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(dialogPanel);
+        Debug.Log("SIUREK: " + isDialogueActive);
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        Debug.Log("CHUJEC: " + isDialogueActive);
         if (isDialogueActive)
         {
+
             Debug.Log("Zamykam poprzedni dialog...");
+
+            return;
             EndDialogue();
         }
 
@@ -78,10 +110,14 @@ public class DialogueManager : MonoBehaviour
             Debug.LogError("dialogPanel nie jest przypisany w DialogueManager!");
             return;
         }
-
+        currentDialogueID = dialogue.id;
         Debug.Log($"Rozpoczynam dialog z {dialogue.dialogueLines[0].character.name}");
 
+        Movement player = GameObject.FindWithTag("Player").GetComponent<Movement>();
+        player.isMoving = false;
+
         isDialogueActive = true;
+
         canReopenDialogue = false;
 
         if (continueButton != null)
@@ -131,6 +167,11 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator TypeSentence(DialogueLine dialogueLine)
     {
+        if (dialogueLine.audioClip != null)
+        {
+            AudioSource audioSource = GameObject.FindWithTag("Audio").GetComponent<AudioSource>();
+            audioSource.PlayOneShot(dialogueLine.audioClip);
+        }
         dialogueArea.text = "";
         foreach (char letter in dialogueLine.line.ToCharArray())
         {
@@ -142,6 +183,14 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         isDialogueActive = false;
+        Movement player = GameObject.FindWithTag("Player").GetComponent<Movement>();
+        player.isMoving = true;
+
+        if (unityEventsMap.TryGetValue(currentDialogueID, out UnityEvent evt))
+        {
+            evt.Invoke();
+        }
+
 
         if (continueButton != null)
         {

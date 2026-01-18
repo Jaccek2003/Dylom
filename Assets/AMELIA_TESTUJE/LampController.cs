@@ -1,60 +1,50 @@
 using UnityEngine;
-using UnityEngine.Rendering.HighDefinition; // Wymagane dla HDRP
+using UnityEngine.Rendering.HighDefinition;
 
 public class HDRPLampController : MonoBehaviour
 {
-    [Header("Ustawienia Œwiat³a HDRP")]
-    public Light physicalLight;            // Przeci¹gnij tutaj swój Spot Light
-    public float onIntensity = 5000f;      // Intensywnoœæ w Lumenach po zapaleniu
-    public bool startActive = false;
+    [Header("Œwiat³a (Spot Lights)")]
+    public Light[] physicalLights;
+    public float onIntensity = 5000f;
 
-    [Header("Efekty Wizualne")]
-    public GameObject bulbObject;          // Sfera/Kostka robi¹ca za ¿arówkê (z Emission)
-    public GameObject volumetricLead;      // Opcjonalnie dodatkowy efekt smugi
-
-    private HDAdditionalLightData hdLightData;
+    [Header("Modele ¯arówek (Mesh Renderers)")]
+    public MeshRenderer[] bulbRenderers;  // Tu przeci¹gnij swoje Sfery (¿arówki)
+    public Material offMaterial;          // Materia³ ciemny
+    public Material onMaterial;           // Materia³ z Emission
 
     void Start()
     {
-        // Pobieramy specjalne dane œwiat³a dla HDRP
-        if (physicalLight != null)
-        {
-            hdLightData = physicalLight.GetComponent<HDAdditionalLightData>();
-        }
-
-        // Ustawiamy stan pocz¹tkowy (zgaszona)
-        SetLampState(startActive);
+        // Na starcie ustawiamy stan "Zgaszony"
+        SetLampState(false);
     }
 
-    // Tê funkcjê podpinamy pod UnityEvent w Twoim skrypcie AcceptItem
+    // Tê funkcjê wywo³uje Twój NPC (AcceptItem)
     public void TurnOnLamp()
     {
         SetLampState(true);
-        Debug.Log("Lampa uliczna zapalona przez NPC!");
+        Debug.Log("Materia³y podmienione, œwiat³a w³¹czone!");
     }
 
     private void SetLampState(bool state)
     {
-        // Zarz¹dzanie fizycznym œwiat³em
-        if (physicalLight != null)
+        // 1. Podmiana materia³ów na ¿arówkach
+        foreach (MeshRenderer renderer in bulbRenderers)
         {
-            physicalLight.enabled = state;
-            if (hdLightData != null)
+            if (renderer != null && offMaterial != null && onMaterial != null)
             {
-                // W HDRP ustawiamy jasnoœæ w Lumenach
-                hdLightData.intensity = state ? onIntensity : 0f;
+                renderer.material = state ? onMaterial : offMaterial;
             }
         }
 
-        // Zarz¹dzanie widocznym modelem ¿arówki
-        if (bulbObject != null)
+        // 2. W³¹czanie fizycznych œwiate³
+        foreach (Light light in physicalLights)
         {
-            bulbObject.SetActive(state);
-        }
-
-        if (volumetricLead != null)
-        {
-            volumetricLead.SetActive(state);
+            if (light != null)
+            {
+                light.enabled = state;
+                var hdData = light.GetComponent<HDAdditionalLightData>();
+                if (hdData != null) hdData.intensity = state ? onIntensity : 0f;
+            }
         }
     }
 }

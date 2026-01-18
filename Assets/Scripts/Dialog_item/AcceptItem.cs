@@ -41,17 +41,25 @@ public class AcceptItem : MonoBehaviour
 
     void Update()
     {
+        foreach (KeyValuePair<string, Dialogue> entry in dialogues)
+        {
+            Debug.Log($"Key: {entry.Key}, Value: {entry.Value}");
+        }
+        Debug.Log(isMouseOver + " - " + rotationHandler.isDragging);
         // Sprawdzanie, czy przedmiot jest przeciągany nad NPC i został upuszczony
         if (Input.GetMouseButtonUp(0) && isMouseOver)
         {
+            Debug.Log("chuj");
             if (rotationHandler.isDragging)
             {
+                Debug.Log("cipa");
                 string draggedItem = rotationHandler.itemName;
                 Debug.Log(rotationHandler.itemName);
+                
                 if (dialogues.ContainsKey(draggedItem))
                 {
-                   
 
+                    Debug.Log("cipsko: " + draggedItem);
                     // Zresetuj stan przeciągania
                     rotationHandler.isDragging = false;
                     rotationHandler.RemoveItem(rotationHandler.itemName);

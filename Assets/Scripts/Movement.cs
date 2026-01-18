@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+
+    public bool isMoving = true;
     Rigidbody rb;
     SpriteRenderer sr;
     Animator anim;
@@ -36,34 +38,39 @@ public class Movement : MonoBehaviour
     
     void Update()
     {
-        isLeftShift = Input.GetKey(KeyCode.LeftShift);
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
-
-        // Flip sprite
-        if (moveHorizontal > 0)
+        if(isMoving)
         {
-            sr.flipX = false;
-        }
-        else if (moveHorizontal < 0)
-        {
-            sr.flipX = true;
-        }
+            isLeftShift = Input.GetKey(KeyCode.LeftShift);
+            moveHorizontal = Input.GetAxis("Horizontal");
+            moveVertical = Input.GetAxis("Vertical");
 
-        // Animacje
-        bool isMoving = moveHorizontal != 0 || moveVertical != 0;
-        anim.SetBool("isRunning", isMoving);
+            // Flip sprite
+            if (moveHorizontal > 0)
+            {
+                sr.flipX = false;
+            }
+            else if (moveHorizontal < 0)
+            {
+                sr.flipX = true;
+            }
 
-        // Skok
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rb.AddForce(Vector3.up * upForce, ForceMode.Impulse);
-            isGrounded = false;
-            // anim.SetBool("isGrounded", false);
-            anim.SetTrigger("jump");
+            // Animacje
+            bool isMoving = moveHorizontal != 0 || moveVertical != 0;
+            anim.SetBool("isRunning", isMoving);
+
+            // Skok
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                rb.AddForce(Vector3.up * upForce, ForceMode.Impulse);
+                isGrounded = false;
+                // anim.SetBool("isGrounded", false);
+                anim.SetTrigger("jump");
+            }
+
+            // Aktualizacja pozycji ekwipunku i plecaka
         }
-
-        // Aktualizacja pozycji ekwipunku i plecaka
+        else
+            anim.SetBool("isRunning", false);
         inventory.position = transform.position + offset;
         backpack.position = transform.position + offset1;
     }
@@ -71,7 +78,10 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         float normalizedSpeed = isLeftShift ? runSpeed * Time.deltaTime : speed * Time.deltaTime;
-        rb.velocity = new Vector3(moveHorizontal * normalizedSpeed, rb.velocity.y, moveVertical * normalizedSpeed);
+        if (isMoving)
+            rb.velocity = new Vector3(moveHorizontal * normalizedSpeed, rb.velocity.y, moveVertical * normalizedSpeed);
+        else
+            rb.velocity = new Vector3(0, 0, 0);
     }
 
     private void OnCollisionEnter(Collision collision)

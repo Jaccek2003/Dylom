@@ -11,6 +11,7 @@ TagManager:
   - Special
   - Key
   - isGrounded
+  - Audio
   layers:
   - Default
   - TransparentFX
