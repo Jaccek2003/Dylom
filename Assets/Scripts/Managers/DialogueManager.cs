@@ -90,7 +90,6 @@ public class DialogueManager : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log("SIUREK: " + isDialogueActive);
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -124,7 +123,7 @@ public class DialogueManager : MonoBehaviour
         {
             continueButton.SetActive(true);
         }
-
+        Debug.Log("O chuj chodzi");
         dialogPanel.SetActive(true);
 
         lines.Clear();

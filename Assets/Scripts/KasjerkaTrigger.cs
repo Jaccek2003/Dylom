@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class KasjerkaTrigger : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class KasjerkaTrigger : MonoBehaviour
     private bool isOnCooldown = false;
     private bool playerInside = false;
 
+    public UnityEvent Event;
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("enter");
@@ -20,7 +23,7 @@ public class KasjerkaTrigger : MonoBehaviour
         {
             Debug.Log("player");
             playerInside = true;
-            dialogueManager.StartDialogue(kasjerkaDialogue);
+          
             StartCoroutine(ShowDialogueWithCooldown());
         }
     }
@@ -42,7 +45,7 @@ public class KasjerkaTrigger : MonoBehaviour
         {
             isOnCooldown = true;
             canvas.SetActive(true);
-            
+            dialogueManager.StartDialogue(kasjerkaDialogue);
             yield return new WaitForSeconds(dialogueDuration);
             dialogueManager.EndDialogue(); // Automatyczne zamkniêcie po 2 sek
             yield return new WaitForSeconds(cooldownTime);
