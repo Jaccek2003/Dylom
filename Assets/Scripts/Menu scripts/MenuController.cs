@@ -29,7 +29,7 @@ public class MenuController : MonoBehaviour
 
     public void NewGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Scena_miasto");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LOADING");
         SaveData.instance = new SaveData();
 
         // Ustaw gracza na jego pocz¹tkowej pozycji (tam, gdzie zosta³ umieszczony w edytorze)

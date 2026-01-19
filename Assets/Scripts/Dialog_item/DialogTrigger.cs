@@ -31,8 +31,9 @@ public class DialogTrigger : MonoBehaviour
                 dialogueManager.StartDialogue(dialogue);
                 wasFinished = true;
                 onDialogueStarted.Invoke();
+                
             }
-            dialogPanel.SetActive(!dialogPanel.activeSelf);
+            
         }
     }
 
@@ -45,6 +46,8 @@ public class DialogTrigger : MonoBehaviour
             if (distanceToPlayer <= talkRange)
             {
                 ToggleDialog();
+                //if (!wasFinished)
+                    dialogPanel.SetActive(true);
             }
         }
     }
@@ -54,6 +57,7 @@ public class DialogTrigger : MonoBehaviour
         if (other.CompareTag("Player") && gameObject.CompareTag("ActiveNPC"))
         {
             ToggleDialog();
+            dialogPanel.SetActive(false);
         }
     }
 

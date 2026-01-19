@@ -59,7 +59,7 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject dialogPanel;
 
-    private bool canReopenDialogue = false;
+    public bool canReopenDialogue { get; set; } = false;
 
     public List<EndDialogueEvent> endDialogueEventList;
 
@@ -124,7 +124,12 @@ public class DialogueManager : MonoBehaviour
             continueButton.SetActive(true);
         }
         Debug.Log("O chuj chodzi");
+		Debug.Log(dialogPanel.activeSelf);
+		Debug.Log(dialogPanel.activeInHierarchy);
         dialogPanel.SetActive(true);
+		Debug.Log("-----");
+		Debug.Log(dialogPanel.activeSelf);
+		Debug.Log(dialogPanel.activeInHierarchy);
 
         lines.Clear();
 
@@ -150,6 +155,7 @@ public class DialogueManager : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(TypeSentence(currentLine));
+        StartCoroutine(EnableDialogPanel());
     }
 
     public void OnContinueButtonClick()
@@ -175,8 +181,15 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in dialogueLine.line.ToCharArray())
         {
             dialogueArea.text += letter;
+            
             yield return new WaitForSeconds(typingSpeed);
         }
+    }
+
+    IEnumerator EnableDialogPanel()
+    {
+        yield return new WaitForSeconds(0.1f);
+        dialogPanel.SetActive(true);
     }
 
     public void EndDialogue()
