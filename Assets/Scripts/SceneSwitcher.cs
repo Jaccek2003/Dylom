@@ -5,28 +5,23 @@ using UnityEngine.Experimental.AI;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public string sceneName; // Nazwa sceny, do której chcesz przejść
-    public SceneManager sceneManager;
+    public string sceneName;
+    private SceneManager sceneManager;
 
     public Vector3 newPos;
 
-
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (other.CompareTag("Player"))
+        sceneManager = FindObjectOfType<SceneManager>();
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
         {
-
-            if (GameManager.instance != null)
-            {
-                other.transform.position = newPos;
-                sceneManager.LoadSceneByName(sceneName);
-
-            }
-            else
-            {
-                Debug.LogError("GameManager instance is not set!");
-
-            }
+            collision.collider.transform.position = newPos;
+            sceneManager.LoadSceneByName(sceneName);
         }
     }
 

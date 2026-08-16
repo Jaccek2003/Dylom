@@ -11,6 +11,13 @@ TagManager:
   - Special
   - Key
   - isGrounded
+  - DialogCanvas
+  - InventoryWheel
+  - DialogManager
+  - Inventory
+  - InventoryCanvas
+  - InventoryManager
+  - ThoughtManager
   layers:
   - Default
   - TransparentFX

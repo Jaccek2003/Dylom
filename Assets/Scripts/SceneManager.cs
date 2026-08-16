@@ -12,7 +12,6 @@ public class SceneManager : MonoBehaviour
 {
     public List<SceneEntry> scenes = new List<SceneEntry>();
 
-    // Start is called before the first frame update
     public void LoadSceneByName(string name)
     {
         foreach (SceneEntry entry in scenes)
@@ -20,7 +19,6 @@ public class SceneManager : MonoBehaviour
             entry.sceneObject.SetActive(false);
         }
 
-        // Look for the scene name in the list
         SceneEntry scene = scenes.Find(s => s.sceneName == name);
         if (scene.sceneObject != null)
         {
