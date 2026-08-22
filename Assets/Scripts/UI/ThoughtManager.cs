@@ -39,7 +39,7 @@ public class ThoughtManager : MonoBehaviour
         get => currentThought;
     }
 
-    private void Start()
+    private void Awake()
     {
         lines = new Queue<ThoughtLine>();
     }

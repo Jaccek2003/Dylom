@@ -3,6 +3,8 @@ using UnityEngine.Events;
 
 public class ProgressManager : MonoBehaviour
 {
+    public UnityEvent onGameStarted;
+
     private bool wasBackpackTaken = false;
     public bool WasBackpackTaken
     {
@@ -64,5 +66,10 @@ public class ProgressManager : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        onGameStarted.Invoke();
     }
 }

@@ -39,6 +39,7 @@ public class DialogManager : MonoBehaviour
     public float typingSpeed = 0.2f;
 
     private Queue<DialogLine> lines;
+    private DialogLine currentLine;
 
     private Dialog currentDialog;
 
@@ -82,12 +83,24 @@ public class DialogManager : MonoBehaviour
         }
 
         DialogLine currentLine = lines.Dequeue();
+        this.currentLine = currentLine;
         currentLine.onDialogLineStarted.Invoke();
         Image characterIcon = GetCharacterIcon();
         characterIcon.sprite = currentLine.character.icon;
 
         StopAllCoroutines();
         StartCoroutine(TypeSentence(currentLine));
+    }
+
+    public void Continue()
+    {
+        if (GetTextArea().text != currentLine.line)
+        {
+            StopAllCoroutines();
+            GetTextArea().text = currentLine.line;
+        }
+        else
+            DisplayNextDialogueLine();
     }
 
     IEnumerator TypeSentence(DialogLine dialogLine)
@@ -136,7 +149,7 @@ public class DialogManager : MonoBehaviour
 
     private void OnContinueButtonClicked()
     {
-        DisplayNextDialogueLine();
+        Continue();
     }
 
     private void OnDestroy()

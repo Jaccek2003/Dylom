@@ -12,6 +12,11 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(LoadGame());
     }
 
+    public void StartMainMenu()
+    {
+        StartCoroutine(LoadMainMenu());
+    }
+
     public void ExitGame()
     {
         #if UNITY_EDITOR
@@ -24,6 +29,16 @@ public class MainMenu : MonoBehaviour
     IEnumerator LoadGame()
     {
         AsyncOperation loadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MainScene");
+
+        while (!loadOperation.isDone)
+        {
+            yield return null;
+        }
+    }
+
+    IEnumerator LoadMainMenu()
+    {
+        AsyncOperation loadOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("MenuScene");
 
         while (!loadOperation.isDone)
         {
