@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
     public Inventory inventory;
-    public Canvas inventoryCanvas;
+    public Canvas inventoryCanvas, flowerCanvas;
 
     private void Start()
     {
@@ -24,5 +22,6 @@ public class InventoryManager : MonoBehaviour
     private void ToggleInventory()
     {
         inventoryCanvas.gameObject.SetActive(!inventoryCanvas.gameObject.activeSelf);
+        flowerCanvas.gameObject.SetActive(!flowerCanvas.gameObject.activeSelf);
     }
 }
