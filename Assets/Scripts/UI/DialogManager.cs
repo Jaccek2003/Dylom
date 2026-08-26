@@ -42,6 +42,11 @@ public class DialogManager : MonoBehaviour
     private DialogLine currentLine;
 
     private Dialog currentDialog;
+    public Dialog CurrentDialog
+    {
+        get => currentDialog;
+    }
+
 
     void Start()
     {

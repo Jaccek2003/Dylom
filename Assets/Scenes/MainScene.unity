@@ -943,6 +943,7 @@ Transform:
   - {fileID: 699136746}
   - {fileID: 1919483867}
   - {fileID: 612810369}
+  - {fileID: 1554399651}
   m_Father: {fileID: 119455427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352104186 stripped
@@ -4318,6 +4319,90 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1447293621}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1554399650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1554399651}
+  - component: {fileID: 1554399653}
+  - component: {fileID: 1554399652}
+  m_Layer: 0
+  m_Name: Dialog trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1554399651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554399650}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -176.9, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 341529409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1554399652
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554399650}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 23.729187, y: 7.572818, z: 39.32109}
+  m_Center: {x: -10.465179, y: -3.286409, z: -4.258972}
+--- !u!114 &1554399653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554399650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b3bf65a47e86744848a9713055f504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 60
+  dialog:
+    id: 
+    dialogLines:
+    - character:
+        name: 
+        icon: {fileID: 0}
+      line: kasjerka triggered
+      audioClip: {fileID: 0}
+      onDialogLineStarted:
+        m_PersistentCalls:
+          m_Calls: []
+    onDialogStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    onDialogEnded:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1572009091
 GameObject:
   m_ObjectHideFlags: 0
